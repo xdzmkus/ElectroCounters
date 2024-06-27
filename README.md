@@ -45,19 +45,25 @@ Add path to VCPKG into CMakePresets.json
 Install vcpkg
 
 > sudo apt-get install curl zip unzip tar
+
 > git clone https://github.com/microsoft/vcpkg.git
+
 > cd vcpkg && ./bootstrap-vcpkg.sh
 
 Configure the VCPKG_ROOT environment variable
 
 > export VCPKG_ROOT=/path/to/vcpkg
+
 > export PATH=$VCPKG_ROOT:$PATH
 
 Build Application
 
 > git clone git@github.com:xdzmkus/ElectroCounters.git
+
 > cd ElectroCounters
+
 > cmake --preset=Ubuntu
+
 > cmake --build build
 
 Edit and Copy ElectroCounters/config.ini to 'build/' directory
