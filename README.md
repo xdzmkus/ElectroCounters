@@ -70,11 +70,13 @@ Build Application
 
 > cmake --build build
 
-Edit and Copy ElectroCounters/config.ini to 'build/' directory
+Edit and Copy ElectroCounters/config.ini to 'build/ElectroCounters' directory
+
+> cp ElectroCounters/config.ini build/ElectroCounters/
 
 Run application:
 
-> cd ./build && ./ElectroCounters
+> cd ./build/ElectroCounters && ./ElectroCounters
 
 
 
