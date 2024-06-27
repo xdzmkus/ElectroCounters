@@ -40,25 +40,29 @@ Add path to VCPKG into CMakePresets.json
 
 ## Ubuntu
 
-> sudo apt-get install build-essential gcc cmake pkg-config
+> sudo apt-get install build-essential gcc g++ cmake pkg-config ninja-build
 
 Install vcpkg
 
 > sudo apt-get install curl zip unzip tar
 
+> cd ~
+
 > git clone https://github.com/microsoft/vcpkg.git
 
 > cd vcpkg && ./bootstrap-vcpkg.sh
 
+> cd ..
+
 Configure the VCPKG_ROOT environment variable
 
-> export VCPKG_ROOT=/path/to/vcpkg
+> export VCPKG_ROOT=~/vcpkg
 
 > export PATH=$VCPKG_ROOT:$PATH
 
 Build Application
 
-> git clone git@github.com:xdzmkus/ElectroCounters.git
+> git clone https://github.com/xdzmkus/ElectroCounters.git
 
 > cd ElectroCounters
 

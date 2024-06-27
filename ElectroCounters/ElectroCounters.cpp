@@ -23,6 +23,12 @@
 #include <Poco/Data/Session.h>
 #include <Poco/Data/Statement.h>
 
+#if __has_include(<format>)
+#include <format>
+#else
+#include <Poco/Format.h>
+#endif
+
 #include <iostream>
 #include <string>
 #include <thread>
@@ -50,13 +56,25 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	const std::string connectionString = format("host={};port={};user={};password={};db={}", 
+#ifdef __cpp_lib_format
+	const std::string connectionString = format("host={};port={};user={};password={};db={}",
 		config->getString("MySQL.host", "localhost"),
 		config->getString("MySQL.port", "3306"),
 		config->getString("MySQL.user", ""),
 		config->getString("MySQL.password", ""),
 		config->getString("MySQL.db", "")
-		);
+	);
+#else
+	// Code without std::format, or just #error if you only
+	// want to support compilers and standard libraries with std::format
+	const std::string connectionString = Poco::format("host=%s;port=%s;user=%s;password=%s;db=%s",
+		config->getString("MySQL.host", "localhost"),
+		config->getString("MySQL.port", "3306"),
+		config->getString("MySQL.user", ""),
+		config->getString("MySQL.password", ""),
+		config->getString("MySQL.db", "")
+	);
+#endif
 
 	// Survey the counters
 

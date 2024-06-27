@@ -15,8 +15,14 @@
 
 #include <Poco/Nullable.h>
 
-#include <string>
+#if __has_include(<format>)
 #include <format>
+#else
+#include <Poco/Format.h>
+#endif
+
+#include <string>
+
 
 struct Counter
 {
@@ -29,6 +35,12 @@ struct Counter
 
 	operator std::string() const
 	{
+#ifdef __cpp_lib_format
 		return std::format("Counter id {} at {}:{}", id, ip.value(), port.value());
+#else
+		// Code without std::format, or just #error if you only
+		// want to support compilers and standard libraries with std::format
+		return Poco::format("Counter id %d at %s:%d", id, ip.value(), port.value());
+#endif
 	}
 };
